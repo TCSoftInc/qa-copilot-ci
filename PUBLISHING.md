@@ -243,3 +243,10 @@ Before every publication, go through this checklist:
 - [ ] All dependencies are correctly specified
 - [ ] The package has been tested with `npm publish --dry-run`
 - [ ] You are logged in to the correct npm account (`npm whoami`)
+- [ ] Ensure links in documentation reference the correct TestCollab QA Copilot URL (https://testcollab.com/qa-copilot)
+
+## Additional Resources
+
+- [TestCollab QA Copilot](https://testcollab.com/qa-copilot) - Official QA Copilot documentation
+- [TestCollab Documentation](https://testcollab.com/docs) - Main TestCollab documentation
+- [npm Documentation](https://docs.npmjs.com/) - Official npm documentation

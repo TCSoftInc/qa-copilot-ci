@@ -132,7 +132,7 @@ You can also configure QA Copilot CI using environment variables in your workflo
 ```yaml
 - name: Trigger QA Tests
   env:
-    QA_COPILOT_API_URL: "https://custom-api.example.com/webhook"
+    QA_COPILOT_API_URL: "https://testcollab.com/qa-copilot/api"
     QA_COPILOT_TEST_MODE: "false"
   run: |
     qac --build ${{ github.run_id }} \
@@ -237,7 +237,7 @@ qa_tests:
   stage: test
   script:
     - npm install -g qa-copilot-ci
-    - export QA_COPILOT_API_URL="https://custom-api.example.com/webhook"
+    - export QA_COPILOT_API_URL="https://testcollab.com/qa-copilot/api"
     - export QA_COPILOT_TEST_MODE="false"
     - qac --build $CI_PIPELINE_ID --app_url $APP_URL --tc_project_id $TC_PROJECT_ID --api_key $QA_COPILOT_API_KEY
   dependencies:
@@ -282,6 +282,7 @@ deploy:
 
 ## Additional Resources
 
-- [QA Copilot API Documentation](https://api.testcollab.com/docs)
+- [QA Copilot Documentation](https://testcollab.com/qa-copilot)
+- [TestCollab Documentation](https://testcollab.com/docs)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [GitLab CI/CD Documentation](https://docs.gitlab.com/ee/ci/)

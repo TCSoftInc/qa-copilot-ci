@@ -24,7 +24,7 @@ This guide provides instructions for setting up and working in the development e
 3. **Set up environment variables (optional)**
    Create a `.env` file in the root directory with:
    ```
-   QA_COPILOT_API_URL=https://your-api-endpoint.com
+   QA_COPILOT_API_URL=https://testcollab.com/qa-copilot/api
    QA_COPILOT_TEST_MODE=false
    ```
 
@@ -170,3 +170,10 @@ Or in their package.json:
 - Include meaningful commit messages
 - Test all changes thoroughly before submitting PRs
 - Document any new functionality or changes to existing behavior
+- Ensure all TestCollab QA Copilot API references are correctly pointing to https://testcollab.com/qa-copilot
+
+## Resources
+
+- [TestCollab QA Copilot](https://testcollab.com/qa-copilot) - Official QA Copilot documentation
+- [TestCollab Documentation](https://testcollab.com/docs) - Main TestCollab documentation
+- [Node.js Documentation](https://nodejs.org/en/docs/) - Official Node.js documentation
