@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node bin/qac.js",
-    "test-mode": "node bin/qac.js --build test-build --app_url https://example.com --tc_project_id test-project --api_key test-key --test_mode",
+    "test-mode": "node bin/qac.js --build test-build --app_url https://example.com --tc_project_id 1234 --api_key test-key --test_mode",
+    "test-staging": "node bin/qac.js --build test-build --app_url https://example.com --tc_project_id 13 --api_key XMboEYx0p5rusITD --api_url https://api.testcollab-dev.io",
     "mock-logs": "node scripts/mock-log-stream.js"
   },
   "keywords": [
@@ -25,7 +26,8 @@
   "dependencies": {
     "axios": "^1.6.2",
     "commander": "^11.1.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "testcollab-sdk": "^2.1.1-SNAPSHOT.202412041305"
   },
   "engines": {
     "node": ">=14.0.0"

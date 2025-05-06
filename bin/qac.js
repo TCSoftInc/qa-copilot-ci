@@ -24,7 +24,7 @@ triggerQaCopilot(options)
     if (options.test_mode) {
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       console.log('Successfully triggered QA Copilot in test mode');
-      console.log(`Queue ID: ${response.queueId || response.queue_id}`);
+      //console.log(`Queue ID: ${response.queueId || response.queue_id}`);
       console.log('Test mode enabled - no actual API calls were made');
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       
@@ -33,7 +33,7 @@ triggerQaCopilot(options)
       }
     } else {
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log(`QA Copilot process completed for queue ID: ${response.queueId || response.queue_id}`);
+      console.log(`QA Copilot process completed`);
       
       if (response.status === 'success') {
         console.log('Status: SUCCESS');

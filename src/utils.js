@@ -1,6 +1,7 @@
 /**
  * Utility functions for QA Copilot CI
  */
+const { Configuration } = require('testcollab-sdk');
 
 /**
  * Formats log messages with timestamps
@@ -99,11 +100,39 @@ function isValidUrl(url) {
     return false;
   }
 }
+const getDate = () => {
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let dateTime = date + '-' + month + '-' + year + ' ' + hours + ':' + minutes;
+  return dateTime;
+}
+
+const getTCConfig = (apiKey, tcURL) => {
+  let config = new Configuration({
+    basePath: tcURL,
+      fetchApi: (url, options) => {
+          // append the token to the url if no query string is present
+          if (!url.includes('?')) {
+              url = url + '?token=' + apiKey;
+          }
+          else {
+              url = url + '&token=' + apiKey;
+          }
+          return fetch(url, options)
+      },
+  
+  })
+  return config;
+}
 
 module.exports = {
   log,
   formatLog,
   createMockResponse,
   createMockLogsResponse,
-  isValidUrl
+  isValidUrl, getDate, getTCConfig
 };

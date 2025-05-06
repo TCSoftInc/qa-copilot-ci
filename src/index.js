@@ -20,34 +20,35 @@ async function triggerQaCopilot(options) {
     // Log the action
     log(`Triggering QA Copilot for build ${config.buildId} at ${config.appUrl}`, 'info');
     
+    
     // Make the API request to trigger testing
     const response = await makeApiRequest(config);
     
     // Extract queue ID from the response
-    const queueId = response.queue_id;
-    if (!queueId) {
-      throw new Error('No queue ID received from API');
+    const testPlanId = response.testPlanId;
+    if (!testPlanId) {
+      throw new Error('No test plan ID received from API');
     }
     
-    log(`Test queued with ID: ${queueId}`, 'info');
+    log(`Test queued with  ID: ${testPlanId}`, 'info');
     
     // If test mode is enabled, skip log streaming
     if (config.testMode) {
       return {
         ...response,
-        queueId,
+        //queueId,
         message: 'Test mode enabled - skipping log streaming'
       };
     }
     
     // Stream logs until completion
     log('Streaming logs...', 'info');
-    const streamResult = await streamLogs(config, queueId);
+    const streamResult = await streamLogs(config, testPlanId);
     
     return {
       ...response,
       ...streamResult,
-      queueId
+      //queueId
     };
   } catch (error) {
     log(`Error: ${error.message}`, 'error');
