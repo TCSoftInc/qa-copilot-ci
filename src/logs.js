@@ -194,7 +194,8 @@ async function streamLogs(config, testPlanId) {
             console.error('Failed Test Cases:');
             failedCases.forEach(title => console.error(`  - ${title}`));
             console.error('------------------------------------');
-            console.log(`View Test Plan: ${testPlanLink}`);
+
+            console.log(`😢 View Test Plan: ${testPlanLink}`);
             process.exit(1); // Exit with error code
           } else if (skippedCases.length > 0) {
             console.warn(`\n⚠️ Test Plan Completed with Skipped Tests!`);
