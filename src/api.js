@@ -118,7 +118,7 @@ async function makeApiRequest(config) {
     // find out how many test cases are tagged with 'ci'
     // 🔧 Easy-to-tweak settings
     //const tagId = 13;
-    const url = "https://api.testcollab-dev.io/testcases/aggrid?token=" + apiKey;
+    const url = apiUrl+"/testcases/aggrid?token=" + apiKey;
 
     // 📦 Request body (adjust freely)
     const body = {
@@ -134,7 +134,7 @@ async function makeApiRequest(config) {
 
       },
       sortModel: [],
-      project: "13",
+      project: projectIdNum,
       showImmediateChildren: false
     };
 
@@ -145,6 +145,8 @@ async function makeApiRequest(config) {
         body: JSON.stringify(body)
       });
       const data = await res.json();
+      //console.log("Response:", data);
+      //process.exit(1);
       testCases = data.filteredCount;
       console.log("CI-tagged test-case count:", testCases);
       // if its 0, exit
