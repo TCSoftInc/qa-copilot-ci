@@ -175,5 +175,5 @@ Or in their package.json:
 ## Resources
 
 - [TestCollab QA Copilot](https://testcollab.com/qa-copilot) - Official QA Copilot documentation
-- [TestCollab Documentation](https://testcollab.com/docs) - Main TestCollab documentation
+- [TestCollab Documentation](https://help.testcollab.com/en/) - Main TestCollab documentation
 - [Node.js Documentation](https://nodejs.org/en/docs/) - Official Node.js documentation

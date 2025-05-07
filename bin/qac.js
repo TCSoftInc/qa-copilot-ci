@@ -24,7 +24,6 @@ triggerQaCopilot(options)
     if (options.test_mode) {
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       console.log('Successfully triggered QA Copilot in test mode');
-      //console.log(`Queue ID: ${response.queueId || response.queue_id}`);
       console.log('Test mode enabled - no actual API calls were made');
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       

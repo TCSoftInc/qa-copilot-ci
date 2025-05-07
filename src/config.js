@@ -5,9 +5,9 @@ require('dotenv').config();
  */
 const DEFAULT_CONFIG = {
   // Default API URL, can be overridden by environment variable or command-line option
-  apiUrl: process.env.QA_COPILOT_API_URL || 'https://api.testcollab.com/qa-copilot/trigger',
-  // Test mode flag, disables actual API calls
-  testMode: process.env.QA_COPILOT_TEST_MODE === 'true' || false
+  apiUrl: 'https://api.testcollab.io',
+  // disabled: Test mode flag, disables actual API calls
+  //testMode: process.env.QA_COPILOT_TEST_MODE === 'true' || false
 };
 
 /**
@@ -22,9 +22,7 @@ function loadConfig(cliOptions = {}) {
     ...DEFAULT_CONFIG,
     
     // Override with environment variables if they exist
-    ...(process.env.QA_COPILOT_API_URL && { apiUrl: process.env.QA_COPILOT_API_URL }),
-    ...(process.env.QA_COPILOT_TEST_MODE === 'true' && { testMode: true }),
-    
+
     // Override with CLI options if specified (highest priority)
     ...(cliOptions.api_url && { apiUrl: cliOptions.api_url }),
     ...(cliOptions.test_mode && { testMode: true }),

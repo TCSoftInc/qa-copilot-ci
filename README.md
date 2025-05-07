@@ -67,10 +67,6 @@ The plugin can be configured through:
 2. **Environment variables** (medium priority)
 3. **Default values** (lowest priority)
 
-### Environment Variables
-
-- `QA_COPILOT_API_URL` - The API endpoint URL
-- `QA_COPILOT_TEST_MODE` - Set to 'true' to enable test mode
 
 ## 🔄 CI Integration Examples
 
@@ -117,7 +113,7 @@ jobs:
           qac --build ${{ github.run_id }} \
               --app_url ${{ steps.deploy.outputs.app_url }} \
               --tc_project_id ${{ secrets.TC_PROJECT_ID }} \
-              --api_key ${{ secrets.QA_COPILOT_API_KEY }}
+              --api_key ${{ secrets.TESTCOLLAB_API_KEY }}
 ```
 
 ### 🦊 GitLab CI
@@ -156,63 +152,6 @@ qa_tests:
     - deploy
 ```
 
-## 🔌 API Integration
-
-The plugin interacts with the Test Collab QA Copilot service through two main API endpoints:
-
-### 🚀 Trigger API
-
-This endpoint initiates a new test run:
-
-- **URL**: `https://api.testcollab.com/qa-copilot/trigger` (default, configurable)
-- **Method**: POST
-- **Headers**:
-  - `Content-Type: application/json`
-  - `Authorization: Bearer {api_key}`
-- **Body**:
-  ```json
-  {
-    "build_id": "string",
-    "app_url": "string",
-    "tc_project_id": "string"
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "status": "success",
-    "message": "Test run initiated successfully",
-    "queue_id": "string"
-  }
-  ```
-
-### 📊 Logs API
-
-This endpoint allows streaming of test execution logs:
-
-- **URL**: `https://api.testcollab.com/qa-copilot/logs/{queue_id}`
-- **Method**: GET
-- **Headers**:
-  - `Authorization: Bearer {api_key}`
-- **Query Parameters**:
-  - `since`: (optional) ID of the last received log
-- **Response**:
-  ```json
-  {
-    "finished": false,
-    "logs": [
-      {
-        "id": 123,
-        "timestamp": "2025-01-01T12:00:00Z",
-        "level": "INFO",
-        "message": "Log message"
-      }
-    ]
-  }
-  ```
-
-When testing is complete, the `finished` field will be set to `true` in the response.
-
 ## 👨‍💻 Development
 
 To contribute to this project:
@@ -226,3 +165,10 @@ To contribute to this project:
 ## 📜 License
 
 MIT
+
+## 🔗 Links
+
+- **Homepage**: [testcollab.com](https://testcollab.com)
+- **Repository**: [https://github.com/TCSoftInc/qa-copilot-ci](https://github.com/TCSoftInc/qa-copilot-ci)
+- **Bug Reports**: [https://github.com/TCSoftInc/qa-copilot-ci/issues](https://github.com/TCSoftInc/qa-copilot-ci/issues)
+- **Demo Video**: [QA Copilot YouTube explainer](https://www.youtube.com/watch?v=-T2lzy32-0g)
