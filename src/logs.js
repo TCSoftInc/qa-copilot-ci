@@ -1,4 +1,4 @@
-const { log, getTCConfig } = require('./utils'); // Removed getDate as it's unused here
+const { log, getTCConfig, humanizeDuration } = require('./utils'); // Added humanizeDuration
 //testcollab-sdk
 const { TestPlansApi, TestPlanTestCasesApi } = require('testcollab-sdk'); // Added TestPlanTestCasesApi
 
@@ -84,11 +84,34 @@ async function getAllTestCases(testPlanCasesApi, projectId, testPlanId) { // Add
  * @returns {Promise<Object>} - Result object with status ('success' or 'error') and final test plan details or error message.
  */
 async function streamLogs(config, testPlanId) {
+  // Record start time for duration calculation
+  const startTime = Date.now();
+  
   // Destructure projectId from config as well
   const { apiKey, apiUrl, projectId } = config; 
   log(`Starting status stream for Test Plan ID: ${testPlanId} in Project ID: ${projectId}`, 'info'); // Updated log
 
   log(`Starting status stream for Test Plan ID: ${testPlanId}`, 'info');
+  
+  // Determine frontendURL for test plan link
+  let frontendURL;
+  if (apiUrl.includes('testcollab-dev.io')) {
+    frontendURL = 'https://testcollab-dev.io';
+  } else if (apiUrl.includes('testcollab.io')) {
+    frontendURL = 'https://testcollab.io';
+  } else {
+    // Fallback if apiUrl format is unexpected
+    let uiBaseUrl = apiUrl;
+    const apiSuffixMatch = uiBaseUrl.match(/\/api(\/v\d+)?$/);
+    if (apiSuffixMatch) {
+      uiBaseUrl = uiBaseUrl.substring(0, apiSuffixMatch.index);
+    }
+    frontendURL = uiBaseUrl;
+    log(`Could not determine frontendURL directly from apiUrl: ${apiUrl}. Using derived base: ${frontendURL}`, 'warn');
+  }
+
+  const projectIdNum = parseInt(projectId, 10);
+  const testPlanLink = `${frontendURL}/project/${projectIdNum}/test_plans/${testPlanId}/view`;
 
   let tcConfig;
   let testPlansApi;
@@ -137,6 +160,11 @@ async function streamLogs(config, testPlanId) {
       if (status === 2 || status === 3) {
         finished = true;
         log(`Test plan ${testPlanId} has finished with status: ${planStatusName}. Fetching final case details...`, 'info');
+        
+        // Calculate elapsed time
+        const endTime = Date.now();
+        const durationMs = endTime - startTime;
+        const elapsedTimeString = humanizeDuration(durationMs);
 
         try {
           // Fetch all test cases for the plan, passing projectId
@@ -161,17 +189,21 @@ async function streamLogs(config, testPlanId) {
           // --- Final Outcome ---
           if (failedCases.length > 0) {
             console.error(`\n❌ Test Plan Failed!`);
+            console.error(`Time Elapsed: ${elapsedTimeString}`);
             console.error('------------------------------------');
             console.error('Failed Test Cases:');
             failedCases.forEach(title => console.error(`  - ${title}`));
             console.error('------------------------------------');
+            console.log(`View Test Plan: ${testPlanLink}`);
             process.exit(1); // Exit with error code
           } else if (skippedCases.length > 0) {
             console.warn(`\n⚠️ Test Plan Completed with Skipped Tests!`);
+            console.warn(`Time Elapsed: ${elapsedTimeString}`);
             console.warn('------------------------------------');
             console.warn('Skipped Test Cases:');
             skippedCases.forEach(title => console.warn(`  - ${title}`));
             console.warn('------------------------------------');
+            console.log(`🌟 View Test Plan: ${testPlanLink}`);
             // Return success, but indicate skips occurred using correct status name
              return {
                status: 'success_with_skips',
@@ -181,7 +213,9 @@ async function streamLogs(config, testPlanId) {
              };
           } else {
             console.log(`\n✅ Test Plan Completed Successfully!`);
+            console.log(`Time Elapsed: ${elapsedTimeString}`);
             console.log('------------------------------------');
+            console.log(`🌟 View Test Plan: ${testPlanLink}`);
              // Return success using correct status name
              return {
                status: 'success',

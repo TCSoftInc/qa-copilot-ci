@@ -100,6 +100,42 @@ function isValidUrl(url) {
     return false;
   }
 }
+
+/**
+ * Formats a duration in milliseconds to a human-readable string
+ * 
+ * @param {number} milliseconds - Duration in milliseconds
+ * @returns {string} - Formatted duration string (e.g., "2 minutes 30 seconds")
+ */
+function humanizeDuration(milliseconds) {
+  if (milliseconds < 0) milliseconds = 0;
+  
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  let parts = [];
+  if (minutes > 0) {
+    parts.push(`${minutes} minute${minutes !== 1 ? 's' : ''}`);
+  }
+  
+  // Always show seconds, even if 0, if minutes are also 0, or if seconds > 0
+  if (seconds > 0 || minutes === 0) {
+    parts.push(`${seconds} second${seconds !== 1 ? 's' : ''}`);
+  }
+  
+  // Handle cases less than 1 second
+  if (parts.length === 0 && milliseconds > 0 && milliseconds < 1000) {
+    return `${milliseconds} millisecond${milliseconds !== 1 ? 's' : ''}`;
+  }
+  
+  // If duration is exactly 0ms
+  if (parts.length === 0) {
+    return '0 seconds';
+  }
+  
+  return parts.join(' ');
+}
 const getDate = () => {
   let date_ob = new Date();
   let date = ("0" + date_ob.getDate()).slice(-2);
@@ -134,5 +170,8 @@ module.exports = {
   formatLog,
   createMockResponse,
   createMockLogsResponse,
-  isValidUrl, getDate, getTCConfig
+  isValidUrl, 
+  getDate, 
+  getTCConfig,
+  humanizeDuration
 };
