@@ -166,6 +166,14 @@ To contribute to this project:
 
 MIT
 
+## 🚀 Sample Project
+
+A sample project is available to help you get started with `qa-copilot-ci` quickly. It demonstrates a basic setup and integration for a Node.js application.
+
+You can find the sample project here: [https://github.com/AbhimanyuG/qac-sample-project/](https://github.com/AbhimanyuG/qac-sample-project/)
+
+Feel free to fork this repository and adapt it to your needs. It provides a practical example of how to configure and use `qa-copilot-ci` in a CI/CD environment.
+
 ## 🔗 Links
 
 - **Homepage**: [testcollab.com](https://testcollab.com)
