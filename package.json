@@ -1,6 +1,6 @@
 {
   "name": "qa-copilot-ci",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CI plugin for triggering Test Collab QA Copilot AI engine from GitHub and GitLab pipelines",
   "main": "src/index.js",
   "bin": {

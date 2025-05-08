@@ -112,7 +112,7 @@ jobs:
         run: |
           qac --build ${{ github.run_id }} \
               --app_url ${{ steps.deploy.outputs.app_url }} \
-              --tc_project_id ${{ secrets.TC_PROJECT_ID }} \
+              --tc_project_id ${{ vars.TC_PROJECT_ID }} \
               --api_key ${{ secrets.TESTCOLLAB_API_KEY }}
 ```
 
