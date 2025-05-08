@@ -9,8 +9,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node bin/qac.js",
-    "test-mode": "node bin/qac.js --build test-build --app_url https://example.com --tc_project_id 1234 --api_key test-key --test_mode",
-    "test-staging": "node bin/qac.js --build test-build --app_url https://abhimanyug.github.io/react-auth-app/ --tc_project_id 15988 --api_key uGxlYFX0LegFFwr8 --api_url https://api.testcollab-dev.io",
     "mock-logs": "node scripts/mock-log-stream.js"
   },
   "keywords": [
